@@ -47,7 +47,7 @@ class Example extends React.Component {
 
 | Method | return | params | Description |
 |:------:|:------:|:------:|:------------|
-| getBase64 | string | type {string} - optional | Gets the selected image, in a base64 string, at the particular crop settings. If no image is loaded, it will return null. Omitting the type will get you a png image, the image types available is dependent on your browser's canvas->base64 support. Any unsupported type defaults back to a png image. |
+| getBase64 | string | type {string} | *Optional*. Gets the selected image, in a base64 string, at the particular crop settings. If no image is loaded, it will return null. Omitting the type will get you a png image, the image types available is dependent on your browser's canvas->base64 support. Any unsupported type defaults back to a png image. |
 | openFileExplorer | void | none | Manually opens the browser's file picker | 
 
 ## Props
