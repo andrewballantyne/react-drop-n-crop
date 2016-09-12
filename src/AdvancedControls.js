@@ -17,12 +17,16 @@ class AdvancedControls extends Component {
     const { onFileOpen, spacing, width, zoomValue } = this.props;
 
     return (
-      <div style={{ width }}>
-        <button onClick={onFileOpen} style={{ padding: 10, margin: spacing, width }}>
+      <div className="rdc-controls" style={{ width }}>
+        <button
+          className="rdc-control-file-pick-btn"
+          onClick={onFileOpen} style={{ padding: 10, margin: spacing, width }}
+        >
           Change File
         </button>
         <input
           type="range"
+          className="rdc-control-zoom-range"
           min={ZOOM_MIN}
           value={zoomValue || ZOOM_MIN}
           step={ZOOM_INCREMENT}

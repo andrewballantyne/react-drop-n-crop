@@ -11,6 +11,7 @@ const userSelectNone = {
 
 class ReactDropNCrop extends Component {
   static propTypes = {
+    disableBorder: PropTypes.bool,
     width: PropTypes.number,
     height: PropTypes.number,
     imagePadding: PropTypes.number,
@@ -51,8 +52,9 @@ class ReactDropNCrop extends Component {
     const { previewSrc, zoomValue } = this.state;
 
     return (
-      <div style={{ ...userSelectNone }}>
+      <div className="rdc" style={{ ...userSelectNone }}>
         <div
+          className="rdc-wrapper"
           onClick={!previewSrc && this.openFileExplorer.bind(this)}
           style={{ position: 'relative', ...this._getWrapperAdjustedStyles() }}
         >
@@ -60,13 +62,14 @@ class ReactDropNCrop extends Component {
             <DropZone
               ref="dropzone"
               disableClick={previewSrc !== null}
+              className="rdc-droparea"
               style={this._getDropZoneAdjustedStyles()}
               onDrop={this._fileDrop.bind(this)}
             >
               {!previewSrc && <span>Drop an image here or click to select a file.</span>}
             </DropZone>
           </div>
-          <div style={{ position: 'absolute' }}>
+          <div className="rdc-editor" style={{ position: 'absolute' }}>
             <ReactAvatarEditor
               ref="editor"
               image={previewSrc}
@@ -130,13 +133,22 @@ class ReactDropNCrop extends Component {
   }
 
   _getDropZoneAdjustedStyles() {
-    const border = 1; // border offsets width/height and mis-aligns the drop area and the scale/crop
-    return {
-      width: this._adjustForWidthProp() - border * 2,
-      height: this._adjustForHeightProp() - border * 2,
-      padding: this._adjustForPaddingProp(),
-      border: `${border}px dashed black`,
-    };
+    const { disableBorder } = this.props;
+    if (disableBorder) {
+      return {
+        width: this._adjustForWidthProp(),
+        height: this._adjustForHeightProp(),
+        padding: this._adjustForPaddingProp(),
+      };
+    } else {
+      const border = 1; // border offsets width/height and mis-aligns the drop area and the scale/crop
+      return {
+        width: this._adjustForWidthProp() - border * 2,
+        height: this._adjustForHeightProp() - border * 2,
+        padding: this._adjustForPaddingProp(),
+        border: `${border}px dashed black`,
+      };
+    }
   }
 
   _getWrapperAdjustedStyles() {
