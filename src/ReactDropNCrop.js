@@ -25,15 +25,24 @@ class ReactDropNCrop extends Component {
     };
   }
 
-  getBase64(type = 'image/png') {
+  /**
+   * Gets the selected image, in a base64 string, at the particular crop settings.
+   *
+   * @param {string} type - Optional. The image type (png - default, jpeg, etc) of the base64 image
+   * @returns {string|null} - A base64 string if an image is available, or null if one is not
+   */
+  getBase64(type = 'png') {
     const { previewSrc } = this.state;
     if (previewSrc !== null && this.refs.editor) {
       const canvas = this.refs.editor.getImageScaledToCanvas();
-      return canvas.toDataURL(type);
+      return canvas.toDataURL(`image/${type}`);
     }
     return null;
   }
 
+  /**
+   * Manually opens up the browser file explorer.
+   */
   openFileExplorer() {
     this.refs.dropzone.open();
   }

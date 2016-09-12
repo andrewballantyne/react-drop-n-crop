@@ -1,9 +1,3 @@
-/**
- * This file is an example of an external hook into the component ReactDropNCrop.
- *
- * There is a root class here that has various wrappers and hooks to get at the data.
- */
-
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import ReactDropNCrop from './ReactDropNCrop';
@@ -15,7 +9,7 @@ const STYLES_PREVIEW = {
   backgroundColor: 'rgba(0,0,0,.4)',
 };
 
-class Root extends Component {
+class ExampleWrapper extends Component {
   constructor(props) {
     super(props);
 
@@ -25,30 +19,18 @@ class Root extends Component {
     };
   }
 
-  pngIt() {
-    this._updatePreview(this.refs.react.getBase64());
-  }
-
-  jpgIt() {
-    this._updatePreview(this.refs.react.getBase64('image/jpeg'));
-  }
-
-  openExplorer() {
-    this.refs.react.openFileExplorer();
-  }
-
   render() {
     const { errorMsg, previewSrc } = this.state;
 
     return (
       <div>
         <h2>External Hooks</h2>
-        <button onClick={this.pngIt.bind(this)}>Get Cropped PNG Image</button>
+        <button onClick={this._pngIt.bind(this)}>Get Cropped PNG Image</button>
         {' '}
-        <button onClick={this.jpgIt.bind(this)}>Get Cropped JPG Image</button>
+        <button onClick={this._jpgIt.bind(this)}>Get Cropped JPG Image</button>
         {' '}
         <button
-          onClick={this.openExplorer.bind(this)}
+          onClick={this._openExplorer.bind(this)}
           title="This is external to the component; this just shows external access to change photo"
         >
           Change Image
@@ -60,6 +42,18 @@ class Root extends Component {
         <ReactDropNCrop ref="react" />
       </div>
     );
+  }
+
+  _pngIt() {
+    this._updatePreview(this.refs.react.getBase64());
+  }
+
+  _jpgIt() {
+    this._updatePreview(this.refs.react.getBase64('jpeg'));
+  }
+
+  _openExplorer() {
+    this.refs.react.openFileExplorer();
   }
 
   _updatePreview(src) {
@@ -81,4 +75,4 @@ class Root extends Component {
   }
 }
 
-ReactDOM.render(<Root />, mountTarget);
+ReactDOM.render(<ExampleWrapper />, mountTarget);

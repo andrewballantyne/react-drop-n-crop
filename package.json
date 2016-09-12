@@ -1,10 +1,10 @@
 {
   "name": "react-drop-n-crop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React Component for dragging and dropping images that can be scaled and cropped to a specific section",
-  "main": "index.js",
+  "main": "src/ReactDropNCrop.js",
   "scripts": {
-    "build": "browserify src/index.js -o dist/bundle.js"
+    "build": "browserify src/ExampleWrapper.js -o example/bundle.js"
   },
   "author": "Andrew Ballantyne",
   "license": "MIT",
