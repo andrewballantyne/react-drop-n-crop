@@ -44,11 +44,11 @@ class Example extends React.Component {
 
 ## Props
 
-| Prop | Default | Description |
-|:----:|:-------:|:------------|
-| width | 400 | The width of the component |
-| height | 300 | The height of the component |
-| imagePadding | 10 | The padding that is present around the edge of the crop area, this is mainly to help the user see the content around the image that will be cropped |
+| Prop | Type | Default | Description |
+|:----:|:----:|:-------:|:------------|
+| width | number | 400 | The width of the component |
+| height | number | 300 | The height of the component |
+| imagePadding | number | 10 | The padding that is present around the edge of the crop area, this is mainly to help the user see the content around the image that will be cropped |
 
 ## Development
 
