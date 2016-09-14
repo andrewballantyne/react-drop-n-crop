@@ -39,7 +39,9 @@ class ExampleWrapper extends Component {
         {errorMsg && <span style={{ color: 'red', padding: 10 }}>No preview available</span>}
         <hr />
         <h2>Everything Below Is The Component</h2>
-        <ReactDropNCrop ref="react" />
+        <ReactDropNCrop ref="react">
+          <span>Drop an image here or click to select a file.</span>
+        </ReactDropNCrop>
       </div>
     );
   }

@@ -11,10 +11,11 @@ class AdvancedControls extends Component {
     spacing: PropTypes.number,
     width: PropTypes.number,
     zoomValue: PropTypes.number,
+    hideZoom: PropTypes.bool,
   };
 
   render() {
-    const { onFileOpen, spacing, width, zoomValue } = this.props;
+    const { hideZoom, onFileOpen, spacing, width, zoomValue } = this.props;
 
     return (
       <div className="rdc-controls" style={{ width }}>
@@ -24,7 +25,7 @@ class AdvancedControls extends Component {
         >
           Change File
         </button>
-        <input
+        {!hideZoom && (<input
           type="range"
           className="rdc-control-zoom-range"
           min={ZOOM_MIN}
@@ -34,7 +35,7 @@ class AdvancedControls extends Component {
           onChange={this._onZoom.bind(this)}
           style={{ margin: spacing, width: '100%' }}
           title="Adjust Zoom"
-        />
+        />)}
       </div>
     );
   }

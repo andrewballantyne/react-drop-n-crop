@@ -11,10 +11,13 @@ const userSelectNone = {
 
 class ReactDropNCrop extends Component {
   static propTypes = {
+    children: PropTypes.node.isRequired,
     disableBorder: PropTypes.bool,
     width: PropTypes.number,
     height: PropTypes.number,
     imagePadding: PropTypes.number,
+    simpleControls: PropTypes.bool,
+    zoomValue: PropTypes.number,
   };
 
   constructor(props) {
@@ -22,7 +25,7 @@ class ReactDropNCrop extends Component {
 
     this.state = {
       previewSrc: null,
-      zoomValue: null,
+      internalZoomValue: null,
     };
   }
 
@@ -49,7 +52,8 @@ class ReactDropNCrop extends Component {
   }
 
   render() {
-    const { previewSrc, zoomValue } = this.state;
+    const { previewSrc } = this.state;
+    const { children, simpleControls, zoomValue } = this.props;
 
     return (
       <div className="rdc" style={{ ...userSelectNone }}>
@@ -66,7 +70,7 @@ class ReactDropNCrop extends Component {
               style={this._getDropZoneAdjustedStyles()}
               onDrop={this._fileDrop.bind(this)}
             >
-              {!previewSrc && <span>Drop an image here or click to select a file.</span>}
+              {!previewSrc && React.cloneElement(children)}
             </DropZone>
           </div>
           <div className="rdc-editor" style={{ position: 'absolute' }}>
@@ -77,15 +81,16 @@ class ReactDropNCrop extends Component {
               height={this._adjustForHeightProp()}
               border={this._adjustForPaddingProp()}
               color={previewSrc ? [0, 0, 0, 0.2] : [255, 255, 255, 0.6]}
-              scale={zoomValue === null ? 1 : zoomValue / 10}
+              scale={this._adjustForZoomProp()}
             />
           </div>
         </div>
-        {previewSrc && (
+        {!simpleControls && previewSrc && (
           <AdvancedControls
             onFileOpen={this.openFileExplorer.bind(this)}
             onZoom={this._zoomChanged.bind(this)}
-            zoomValue={zoomValue}
+            zoomValue={this._adjustForZoomProp()}
+            hideZoom={typeof zoomValue !== 'undefined'}
             spacing={this._adjustForPaddingProp()}
             width={this._adjustForWidthProp()}
           />
@@ -95,7 +100,7 @@ class ReactDropNCrop extends Component {
   }
 
   _zoomChanged(newZoom) {
-    this.setState({ zoomValue: newZoom });
+    this.setState({ internalZoomValue: newZoom });
   }
 
   _fileDrop(files) {
@@ -116,6 +121,14 @@ class ReactDropNCrop extends Component {
     });
   }
 
+  _adjustForZoomProp() {
+    const { zoomValue } = this.props;
+    if (typeof zoomValue === 'undefined') {
+      const { internalZoomValue } = this.state;
+      return internalZoomValue === null ? 1 : internalZoomValue / 10; // internalZoom is z*10
+    }
+    return zoomValue;
+  }
 
   _adjustForWidthProp() {
     const { width } = this.props;

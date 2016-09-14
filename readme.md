@@ -25,7 +25,9 @@ class Example extends React.Component {
     return (
       <div>
         <h1>React Drop'N'Crop</h1>
-        <ReactDropNCrop ref="react" />
+        <ReactDropNCrop ref="react">
+          <span>Some instructional text</span>
+        </ReactDropNCrop>
       </div>
     );
   }
@@ -47,7 +49,7 @@ class Example extends React.Component {
 
 | Method | return | params | Description |
 |:------:|:------:|:------:|:------------|
-| getBase64 | string | type {string} | *Optional*. Gets the selected image, in a base64 string, at the particular crop settings. If no image is loaded, it will return null. Omitting the type will get you a png image, the image types available is dependent on your browser's canvas->base64 support. Any unsupported type defaults back to a png image. |
+| getBase64 | string | type {string} *Optional* | Gets the selected image, in a base64 string, at the particular crop settings. If no image is loaded, it will return null. Omitting the type will get you a png image, the image types available is dependent on your browser's canvas->base64 support. Any unsupported type defaults back to a png image. |
 | openFileExplorer | void | none | Manually opens the browser's file picker | 
 
 ## Props
@@ -57,7 +59,9 @@ class Example extends React.Component {
 | width | number | 400 | The width of the component |
 | height | number | 300 | The height of the component |
 | imagePadding | number | 10 | The padding that is present around the edge of the crop area, this is mainly to help the user see the content around the image that will be cropped |
-| disableBorder | boolean | false | True to disable the dashed outline around the component; such as for stlying if you want to do something alternatively |
+| disableBorder | boolean | false | True to disable the dashed outline around the component; such as for styling if you want to do something alternatively |
+| simpleControls | boolean | false | True to hide the internal button controls for zooming and manually opening the file picker, leaving just the "simple" controls (panning and file selection); these controls will by default appear when an image is selected |
+| zoomValue | number | 1 | A number to apply the zoom at; 1 is "scaled to full width or height" (which ever is smaller). \<1 is a zoom out, \>1 is a zoom in. This props is intended if you are to have some external control over the zoom.<br/>**Note**: If this prop is present, the internal tool for zoom is auto-hidden (to disable both the zoom control AND the file selection button, @see the disabledAdvancedControls prop) |
 
 ## Styling
 
@@ -67,7 +71,9 @@ JSX Content:
 
 ```html
 <div className="wrapper">
-  <ReactDropNCrop />
+  <ReactDropNCrop>
+    <span>Some instructional content.</span>
+  </ReactDropNCrop>
 </div>
 ```
 
@@ -88,7 +94,7 @@ SASS layout:
         // styles for the editor
       }
     }
-    .rdc-controls {
+    .rdc-controls { // also disablable via the simpleControls prop 
       // styles for the controls that appear after a file is selected
       .rdc-control-file-pick-btn {
         // styles for the additional file pick button
