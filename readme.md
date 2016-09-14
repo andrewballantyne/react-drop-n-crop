@@ -61,7 +61,7 @@ class Example extends React.Component {
 | imagePadding | number | 10 | The padding that is present around the edge of the crop area, this is mainly to help the user see the content around the image that will be cropped |
 | disableBorder | boolean | false | True to disable the dashed outline around the component; such as for styling if you want to do something alternatively |
 | simpleControls | boolean | false | True to hide the internal button controls for zooming and manually opening the file picker, leaving just the "simple" controls (panning and file selection); these controls will by default appear when an image is selected |
-| zoomValue | number | 1 | A number to apply the zoom at; 1 is "scaled to full width or height" (which ever is smaller). \<1 is a zoom out, \>1 is a zoom in. This props is intended if you are to have some external control over the zoom.<br/>**Note**: If this prop is present, the internal tool for zoom is auto-hidden (to disable both the zoom control AND the file selection button, @see the disabledAdvancedControls prop) |
+| zoomValue | number | 1 | A number to apply the zoom at; 1 is "scaled to full width or height" (which ever is smaller). \<1 is a zoom out, \>1 is a zoom in. This props is intended if you are to have some external control over the zoom.<br/>**Note**: If this prop is present, the internal tool for zoom is auto-hidden (to disable both the zoom control AND the file selection button, @see the simpleControls prop) |
 
 ## Styling
 
