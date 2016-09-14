@@ -8,8 +8,9 @@ An ideal intended goal would be to eventually remove the *react-dropzone* and *r
 
 1. [Installation](#installation)
 1. [Usage](#usage)
-1. [Props](#props)
-1. [Styling](#styling)
+    1. [Public API](#public-api)
+    1. [Props](#props)
+    1. [Styling](#styling)
 1. [Development](#development)
 1. [License](#license)
 
@@ -62,7 +63,7 @@ public openFileExplorer():void
 
 * Manually opens the browser's file picker 
 
-## Props
+### Props
 
 | Prop | Type | Default | Description |
 |:----:|:----:|:-------:|:------------|
@@ -73,7 +74,7 @@ public openFileExplorer():void
 | simpleControls | boolean | false | True to hide the internal button controls for zooming and manually opening the file picker, leaving just the "simple" controls (panning and file selection); these controls will by default appear when an image is selected |
 | zoomValue | number | 1 | A number to apply the zoom at; 1 is "scaled to full width or height" (which ever is smaller). \<1 is a zoom out, \>1 is a zoom in. This props is intended if you are to have some external control over the zoom.<br/>**Note**: If this prop is present, the internal tool for zoom is auto-hidden (to disable both the zoom control AND the file selection button, @see the simpleControls prop) |
 
-## Styling
+### Styling
 
 Styling is a bit of a fickle beast, as React Drop'N'Crop uses external libraries currently. But with that said, here is how you can style everything:
 
