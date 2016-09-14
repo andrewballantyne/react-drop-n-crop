@@ -25,7 +25,7 @@ class ReactDropNCrop extends Component {
 
     this.state = {
       previewSrc: null,
-      internalZoomValue: null,
+      internalZoomValue: 1,
     };
   }
 
@@ -124,8 +124,7 @@ class ReactDropNCrop extends Component {
   _adjustForZoomProp() {
     const { zoomValue } = this.props;
     if (typeof zoomValue === 'undefined') {
-      const { internalZoomValue } = this.state;
-      return internalZoomValue === null ? 1 : internalZoomValue / 10; // internalZoom is z*10
+      return this.state.internalZoomValue;
     }
     return zoomValue;
   }

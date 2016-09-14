@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 
-const ZOOM_MIN = 10;
+const FACTOR = 10;
+const ZOOM_MIN = 1 * FACTOR;
 const ZOOM_INCREMENT = 2;
-const ZOOM_MAX = 30;
+const ZOOM_MAX = 3 * FACTOR;
 
 class AdvancedControls extends Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class AdvancedControls extends Component {
           type="range"
           className="rdc-control-zoom-range"
           min={ZOOM_MIN}
-          value={zoomValue || ZOOM_MIN}
+          value={typeof zoomValue === 'number' ? zoomValue * FACTOR : ZOOM_MIN}
           step={ZOOM_INCREMENT}
           max={ZOOM_MAX}
           onChange={this._onZoom.bind(this)}
@@ -42,7 +43,7 @@ class AdvancedControls extends Component {
 
   _onZoom({ currentTarget: { value } }) {
     const { onZoom } = this.props;
-    onZoom(parseInt(value) || ZOOM_MIN);
+    onZoom(parseInt(value) / FACTOR || ZOOM_MIN / FACTOR);
   }
 }
 
